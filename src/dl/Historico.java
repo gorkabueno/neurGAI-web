@@ -1,117 +1,95 @@
 package dl;
 
-import java.io.Serializable;
-import javax.persistence.*;
+
 
 
 /**
  * The persistent class for the Historico database table.
  * 
  */
-@Entity
-@NamedQuery(name="Historico.findAll", query="SELECT h FROM Historico h")
-public class Historico implements Serializable {
-	private static final long serialVersionUID = 1L;
 
-	@Id
-	private String idHistorico;
+public class Historico {
 
-	@Column(name="Day_Energy")
-	private String day_Energy;
+	private int idHistorico;
 
-	@Column(name="Frecuencia")
-	private String frecuencia;
+	private float day_Energy;
 
-	@Column(name="I_AC")
-	private String iAc;
+	private float frecuencia;
 
-	@Column(name="I_DC")
-	private String iDc;
+	private float iAc;
 
-	@Column(name="Opcion_idOpcion")
-	private int opcion_idOpcion;
+	private float iDc;
 
-	@Column(name="Temperatura_modulo")
-	private String temperatura_modulo;
+	private float temperatura_modulo;
 
-	@Column(name="V_AC")
-	private String vAc;
+	private float vAc;
 
-	@Column(name="V_DC")
-	private String vDc;
+	private float vDc;
 
 	public Historico() {
 	}
 
-	public String getIdHistorico() {
+	public int getIdHistorico() {
 		return this.idHistorico;
 	}
 
-	public void setIdHistorico(String idHistorico) {
+	public void setIdHistorico(int idHistorico) {
 		this.idHistorico = idHistorico;
 	}
 
-	public String getDay_Energy() {
+	public float getDay_Energy() {
 		return this.day_Energy;
 	}
 
-	public void setDay_Energy(String day_Energy) {
+	public void setDay_Energy(float day_Energy) {
 		this.day_Energy = day_Energy;
 	}
 
-	public String getFrecuencia() {
+	public float getFrecuencia() {
 		return this.frecuencia;
 	}
 
-	public void setFrecuencia(String frecuencia) {
+	public void setFrecuencia(float frecuencia) {
 		this.frecuencia = frecuencia;
 	}
 
-	public String getIAc() {
+	public float getIAc() {
 		return this.iAc;
 	}
 
-	public void setIAc(String iAc) {
+	public void setIAc(float iAc) {
 		this.iAc = iAc;
 	}
 
-	public String getIDc() {
+	public float getIDc() {
 		return this.iDc;
 	}
 
-	public void setIDc(String iDc) {
+	public void setIDc(float iDc) {
 		this.iDc = iDc;
 	}
 
-	public int getOpcion_idOpcion() {
-		return this.opcion_idOpcion;
-	}
-
-	public void setOpcion_idOpcion(int opcion_idOpcion) {
-		this.opcion_idOpcion = opcion_idOpcion;
-	}
-
-	public String getTemperatura_modulo() {
+	public float getTemperatura_modulo() {
 		return this.temperatura_modulo;
 	}
 
-	public void setTemperatura_modulo(String temperatura_modulo) {
+	public void setTemperatura_modulo(float temperatura_modulo) {
 		this.temperatura_modulo = temperatura_modulo;
 	}
 
-	public String getVAc() {
+	public float getVAc() {
 		return this.vAc;
 	}
 
-	public void setVAc(String vAc) {
+	public void setVAc(float vAc) {
 		this.vAc = vAc;
 	}
 
-	public String getVDc() {
+	public float getVDc() {
 		return this.vDc;
 	}
 
-	public void setVDc(String vDc) {
+	public void setVDc(float vDc) {
 		this.vDc = vDc;
 	}
 
