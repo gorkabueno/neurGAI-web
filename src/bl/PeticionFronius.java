@@ -39,10 +39,7 @@ public class PeticionFronius {
 		      }  
 		      
 		      Gson gson = new Gson();
-		      Type listtype = new TypeToken<ArrayList<Historico>>(){}
-		      .getType();
-		     List<Historico> datos = gson.fromJson(in, listtype);
-		     
+		      
 		     
 		     String sURL ="http://u020556.bi.ehu.es/solar_api/v1/GetInverterRealtimeData.cgi?Scope=System"; //"http://freegeoip.net/json/"; //just a string
 
@@ -58,9 +55,9 @@ public class PeticionFronius {
 		     //Con esto he conseguido obtener datos de un json, pero de campos simples
 		     //String zipcode = rootobj.get("ip").getAsString(); //just grab the zipcode
 		     //System.out.println(zipcode);
-		     Inverter countryObj = gson.fromJson(rootobj, Inverter.class); 
-		     System.out.println("Temperatura modulo: "+countryObj.getTOTAL_ENERGY());  
-
+		     Inverter datos = gson.fromJson(rootobj, Inverter.class); 
+		     //System.out.println("Temperatura modulo: "+countryObj.getBody().getData().getTOTAL_ENERGY().getUnit());  
+		   System.out.println("Temperatura modulo: "+datos.getBody().getData().getTOTAL_ENERGY().getUnit());  
 		      
 		      
 		   }
