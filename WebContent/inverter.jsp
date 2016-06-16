@@ -5,6 +5,9 @@
 <html>
 <head>
 <title>Inverter</title>
+<link href="resources/css/bootstrap-theme.css" rel="stylesheet">
+<!-- <link href="/resources/css/bootstrap.min.css" rel="stylesheet"> -->
+<link href="resources/css/bootstrap.css" rel="stylesheet">
 <script type="text/javascript">
 function enviar(pagina){
 	document.botones.action = pagina;
@@ -12,6 +15,7 @@ function enviar(pagina){
 
 	}
 </script>
+
 </head>
 <body>
 <h1>Sensor de Fronius</h1>
@@ -33,7 +37,7 @@ for (int i=0;i<lista.size();i++)
    out.println("<td>"+lista.get(i).getDay_Energy()+"</td>");
    out.println("<td>"+lista.get(i).getPower()+"</td>");
    out.println("<td>"+lista.get(i).getStatus()+"</td>");
-   out.println("<td>"+lista.get(i).getTotal_Energy()+"</td>");
+   out.println("<td>"+lista.get(i).getTOTAL_ENERGY()+"</td>");
    out.println("<td>"+lista.get(i).getYear_Energy()+"</td>");
    out.println("</tr>");
 }

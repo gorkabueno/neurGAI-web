@@ -1,9 +1,13 @@
 package dl;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
  * The persistent class for the Inverter database table.
  * 
  */
+@XmlRootElement
 public class Inverter {
 
 	private int idInverter;
@@ -14,13 +18,14 @@ public class Inverter {
 
 	private int status;
 
-	private float total_Energy;
+	private float TOTAL_ENERGY;
 
 	private float year_Energy;
 
 	public Inverter() {
 	}
 
+	@XmlElement
 	public int getIdInverter() {
 		return this.idInverter;
 	}
@@ -29,6 +34,7 @@ public class Inverter {
 		this.idInverter = idInverter;
 	}
 
+	@XmlElement
 	public float getDay_Energy() {
 		return this.day_Energy;
 	}
@@ -37,6 +43,7 @@ public class Inverter {
 		this.day_Energy = day_Energy;
 	}
 
+	@XmlElement
 	public float getPower() {
 		return this.power;
 	}
@@ -45,14 +52,7 @@ public class Inverter {
 		this.power = power;
 	}
 
-	public float getTotal_Energy() {
-		return this.total_Energy;
-	}
-
-	public void setTotal_Energy(float total_Energy) {
-		this.total_Energy = total_Energy;
-	}
-
+	@XmlElement
 	public float getYear_Energy() {
 		return this.year_Energy;
 	}
@@ -61,12 +61,21 @@ public class Inverter {
 		this.year_Energy = year_Energy;
 	}
 
+	@XmlElement
 	public int getStatus() {
 		return status;
 	}
 
 	public void setStatus(int status) {
 		this.status = status;
+	}
+	@XmlElement
+	public float getTOTAL_ENERGY() {
+		return TOTAL_ENERGY;
+	}
+
+	public void setTOTAL_ENERGY(float tOTAL_ENERGY) {
+		TOTAL_ENERGY = tOTAL_ENERGY;
 	}
 
 }
