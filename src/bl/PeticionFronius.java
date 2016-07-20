@@ -1,65 +1,137 @@
 package bl;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.lang.reflect.Type;
-import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLConnection;
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import com.google.gson.reflect.TypeToken;
+import javax.json.Json;
+import javax.json.JsonObject;
+import javax.json.JsonReader;
 
-import dl.Historico;
-import dl.Inverter;
+
 
 public class PeticionFronius {
+	
+	private int idInverter;
 
-	public static void peticion() throws MalformedURLException, IOException {
-		 
-		      URL url = new URL("http://u020556.bi.ehu.es/solar_api/v1/GetInverterRealtimeData.cgi?Scope=System");
-		      URLConnection con = url.openConnection();
-		 
-		      BufferedReader in = new BufferedReader(
-		         new InputStreamReader(con.getInputStream()));
-		 
-		      String linea;
-		    
-		      while ((linea = in.readLine()) != null) {
-		         System.out.println(linea);
-		       
-		      }  
-		      
-		      Gson gson = new Gson();
-		      
+	private static float day_Energy;
+
+	private static float power;
+
+	private int status;
+
+	private static float TOTAL_ENERGY;
+
+	private static float year_Energy;
+
+	public static void peticionInverter() throws MalformedURLException, IOException {
+		
 		     
-		     String sURL ="http://u020556.bi.ehu.es/solar_api/v1/GetInverterRealtimeData.cgi?Scope=System"; //"http://freegeoip.net/json/"; //just a string
+		      URL url3 = new URL("http://u020556.bi.ehu.es/solar_api/v1/GetInverterRealtimeData.cgi?Scope=System");
 
-		     // Connect to the URL using java's native library
-		     URL url2 = new URL(sURL);
-		     HttpURLConnection request = (HttpURLConnection) url2.openConnection();
-		     request.connect();
+		      try (InputStream is = url3.openStream();
+		           JsonReader rdr = Json.createReader(is)) {
 
-		     // Convert to a JSON object to print data
-		     JsonParser jp = new JsonParser(); //from gson
-		     JsonElement root = jp.parse(new InputStreamReader((InputStream) request.getContent())); //Convert the input stream to a json element
-		     JsonObject rootobj = root.getAsJsonObject(); //May be an array, may be an object. 
-		     //Con esto he conseguido obtener datos de un json, pero de campos simples
-		     //String zipcode = rootobj.get("ip").getAsString(); //just grab the zipcode
-		     //System.out.println(zipcode);
-		     Inverter datos = gson.fromJson(rootobj, Inverter.class); 
-		     //System.out.println("Temperatura modulo: "+countryObj.getBody().getData().getTOTAL_ENERGY().getUnit());  
-		   System.out.println("Temperatura modulo: "+datos.getBody().getData().getTOTAL_ENERGY().getUnit());  
-		      
-		      
+		          JsonObject obj = rdr.readObject();
+
+		          JsonObject body = obj.getJsonObject("Body");
+		          JsonObject data = body.getJsonObject("Data");
+		          JsonObject energy = data.getJsonObject("TOTAL_ENERGY");
+		          JsonObject valuestotal = energy.getJsonObject("Values");
+		          TOTAL_ENERGY = valuestotal.getInt("1");
+		          
+		          JsonObject pac =data.getJsonObject("PAC");
+		          JsonObject valuespac =pac.getJsonObject("Values");
+		          power = valuespac.getInt("1");
+		          
+		          JsonObject day =data.getJsonObject("DAY_ENERGY");
+		          JsonObject valuesday =day.getJsonObject("Values");
+		          day_Energy = valuesday.getInt("1");
+		          
+		          JsonObject year =data.getJsonObject("YEAR_ENERGY");
+		          JsonObject valuesyear =year.getJsonObject("Values");
+		          year_Energy = valuesyear.getInt("1");
+		          
+		          System.out.println(power);
+		          System.out.println(day_Energy);
+		          System.out.println(year_Energy);
+		          System.out.println(TOTAL_ENERGY);
+		          
+		          
+		      }  
+		     
 		   }
+	
+	public static void actualizarInverter(){
+		
+		try
+	      {
+	         Class.forName("org.gjt.mm.mysql.Driver");
+	         Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/neurGaiBBDD", "root", "19071989j");
+	         String Ssql = "UPDATE Inverter SET total_Energy=?, year_Energy=?, "+ "WHERE idInverter=1;";
+	         PreparedStatement prest = conexion.prepareStatement(Ssql);
+	         prest.setFloat(1, TOTAL_ENERGY);
+	         prest.setFloat(2, year_Energy);
+	         
+	      }catch (Exception e)
+	      {
+	          e.printStackTrace();
+	       }
+		
+	}	    
+
+	public int getIdInverter() {
+		return idInverter;
+	}
+
+	public void setIdInverter(int idInverter) {
+		this.idInverter = idInverter;
+	}
+
+	public float getDay_Energy() {
+		return day_Energy;
+	}
+
+	public void setDay_Energy(float day_Energy) {
+		this.day_Energy = day_Energy;
+	}
+
+	public float getPower() {
+		return power;
+	}
+
+	public void setPower(float power) {
+		this.power = power;
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
+	public float getTOTAL_ENERGY() {
+		return TOTAL_ENERGY;
+	}
+
+	public void setTOTAL_ENERGY(float tOTAL_ENERGY) {
+		TOTAL_ENERGY = tOTAL_ENERGY;
+	}
+
+	public float getYear_Energy() {
+		return year_Energy;
+	}
+
+	public void setYear_Energy(float year_Energy) {
+		this.year_Energy = year_Energy;
+	}
 
 }

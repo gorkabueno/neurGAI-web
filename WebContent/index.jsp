@@ -5,6 +5,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>neurGai</title>
+<link href="/resources/css/bootstrap-theme.css" rel="stylesheet">
+<link href="/resources/css/bootstrap.min.css" rel="stylesheet">
+<link href="bootstrap.css" rel="stylesheet">
 <script type="text/javascript">
 function enviar(pagina){
 	document.botones.action = pagina;

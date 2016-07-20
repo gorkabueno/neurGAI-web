@@ -51,8 +51,7 @@ public class ConsultaBBDD
       try
       {
          Class.forName("org.gjt.mm.mysql.Driver");
-         Connection conexion = DriverManager.getConnection(
-            "jdbc:mysql://localhost/neurGaiBBDD", "root", "19071989j");
+         Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/neurGaiBBDD", "root", "19071989j");
          Statement st = conexion.createStatement();
          ResultSet rs = st.executeQuery("SELECT * FROM Inverter" );
          while (rs.next())
@@ -62,7 +61,7 @@ public class ConsultaBBDD
             datos.setDay_Energy(rs.getFloat("day_Energy"));
             datos.setPower(rs.getFloat("power"));
             datos.setStatus(rs.getInt("status"));
-            datos.setTotal_Energy(rs.getFloat("total_Energy"));
+            datos.setTOTAL_ENERGY(rs.getFloat("TOTAL_ENERGY"));
             datos.setYear_Energy(rs.getFloat("year_Energy"));
             listaInverter.add(datos);
 

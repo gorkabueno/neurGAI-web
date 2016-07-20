@@ -1,6 +1,8 @@
 package bl;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -27,15 +29,18 @@ public class ServletPeticion extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/inverter.jsp");
+		dispatcher.forward(request,response);
+		PeticionFronius.peticionInverter();
+		PeticionFronius.actualizarInverter();
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		PeticionFronius.peticion();
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 		
 	}
 

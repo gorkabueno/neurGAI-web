@@ -5,6 +5,9 @@
 <html>
 <head>
 <title>Sensor</title>
+<link href="/resources/css/bootstrap-theme.css" rel="stylesheet">
+<link href="/resources/css/bootstrap.min.css" rel="stylesheet">
+<link href="bootstrap.css" rel="stylesheet">
 <script type="text/javascript">
 function enviar(pagina){
 	document.botones.action = pagina;
@@ -12,6 +15,7 @@ function enviar(pagina){
 
 	}
 </script>
+
 </head>
 <body>
 <h1>Sensor de Fronius</h1>

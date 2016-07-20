@@ -1,10 +1,14 @@
 <%@ page language="java" %>
 <%@ page import = "dl.Historico"%> 
 <%@ page import = "bl.ConsultaBBDD"%> 
-<%@ page import = "java.util.LinkedList"%> 
+<%@ page import = "java.util.LinkedList"%>
+<%@ page import = "bl.PeticionFronius"%>  
 <html>
 <head>
 <title>Historico</title>
+<link href="/resources/css/bootstrap-theme.css" rel="stylesheet">
+<link href="/resources/css/bootstrap.min.css" rel="stylesheet">
+<link href="bootstrap.css" rel="stylesheet">
 <script type="text/javascript">
 function enviar(pagina){
 	document.botones.action = pagina;
@@ -12,6 +16,7 @@ function enviar(pagina){
 
 	}
 </script>
+
 </head>
 <body>
 <h1>Historico de Fronius</h1>
@@ -47,6 +52,9 @@ for (int i=0;i<lista.size();i++)
 <input type="button" value="Principal" onClick="enviar('index.jsp')">
 <input type="button" value="Inverter" onClick="enviar('inverter.jsp')">
 <input type="button" value="Sensor" onClick="enviar('sensor.jsp')">
+</form>
+<form action="${pageContext.request.contextPath}/ServletPeticion" method="post">
+<input type="submit" name="button1" value="BUSCAR" />
 </form>
 </body>
 </html>
