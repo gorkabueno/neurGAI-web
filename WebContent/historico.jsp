@@ -54,7 +54,7 @@ for (int i=0;i<lista.size();i++)
 <input type="button" value="Sensor" onClick="enviar('sensor.jsp')">
 </form>
 <form action="${pageContext.request.contextPath}/ServletPeticion" method="post">
-<input type="submit" name="button1" value="BUSCAR" />
+<input type="submit" name="button1" value="REFRESH" />
 </form>
 </body>
 </html>

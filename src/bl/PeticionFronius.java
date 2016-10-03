@@ -7,8 +7,6 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
 
 import javax.json.Json;
 import javax.json.JsonObject;
@@ -16,8 +14,10 @@ import javax.json.JsonReader;
 
 
 
-public class PeticionFronius {
+public class PeticionFronius{
 	
+
+
 	private int idInverter;
 
 	private static float day_Energy;
@@ -64,27 +64,34 @@ public class PeticionFronius {
 		          System.out.println(TOTAL_ENERGY);
 		          
 		          
-		      }  
+		      }
+		      
+		      try
+		      {
+				
+				
+			      Class.forName("org.gjt.mm.mysql.Driver");
+			      Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/neurGaiBBDD", "root", "19071989j");
+			      String query = "update Inverter set total_Energy = ?, power = ?, day_energy = ?, year_Energy = ? where idInverter = ?";
+			      PreparedStatement preparedStmt = conn.prepareStatement(query);
+			      preparedStmt.setFloat(1, TOTAL_ENERGY);
+			      preparedStmt.setFloat(2, power);
+			      preparedStmt.setFloat(3, day_Energy);
+			      preparedStmt.setFloat(4, year_Energy);
+			      preparedStmt.setInt(5, 1);
+		        
+			      preparedStmt.executeUpdate();
+			      
+			      conn.close();
+		         
+		      }catch (Exception e)
+		      {
+		          e.printStackTrace();
+		       }
+		      
 		     
 		   }
-	
-	public static void actualizarInverter(){
-		
-		try
-	      {
-	         Class.forName("org.gjt.mm.mysql.Driver");
-	         Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/neurGaiBBDD", "root", "19071989j");
-	         String Ssql = "UPDATE Inverter SET total_Energy=?, year_Energy=?, "+ "WHERE idInverter=1;";
-	         PreparedStatement prest = conexion.prepareStatement(Ssql);
-	         prest.setFloat(1, TOTAL_ENERGY);
-	         prest.setFloat(2, year_Energy);
-	         
-	      }catch (Exception e)
-	      {
-	          e.printStackTrace();
-	       }
-		
-	}	    
+		    
 
 	public int getIdInverter() {
 		return idInverter;
@@ -99,7 +106,7 @@ public class PeticionFronius {
 	}
 
 	public void setDay_Energy(float day_Energy) {
-		this.day_Energy = day_Energy;
+		PeticionFronius.day_Energy = day_Energy;
 	}
 
 	public float getPower() {
@@ -107,7 +114,7 @@ public class PeticionFronius {
 	}
 
 	public void setPower(float power) {
-		this.power = power;
+		PeticionFronius.power = power;
 	}
 
 	public int getStatus() {
@@ -131,7 +138,7 @@ public class PeticionFronius {
 	}
 
 	public void setYear_Energy(float year_Energy) {
-		this.year_Energy = year_Energy;
+		PeticionFronius.year_Energy = year_Energy;
 	}
 
 }
