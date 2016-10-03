@@ -16,5 +16,7 @@ git pull
  3.2 Commit: git commit "comentario sobre los cambios hechos"
  3.3 Push:   git push 
  3.4 Credenciales: sdeihan (enter) y la pass.
+ 
+ Final
 
 
