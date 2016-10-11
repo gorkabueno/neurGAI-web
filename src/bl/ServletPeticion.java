@@ -33,6 +33,7 @@ public class ServletPeticion extends HttpServlet {
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/inverter.jsp");
 		dispatcher.forward(request,response);
 		PeticionFronius.peticionInverter();
+		PeticionFronius.peticionSensor();
 	}
 
 	/**

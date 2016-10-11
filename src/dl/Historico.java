@@ -1,13 +1,13 @@
 package dl;
 
-
-
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * The persistent class for the Historico database table.
  * 
  */
-
+@XmlRootElement
 public class Historico {
 
 	private int idHistorico;
@@ -28,7 +28,8 @@ public class Historico {
 
 	public Historico() {
 	}
-
+	
+	@XmlElement
 	public int getIdHistorico() {
 		return this.idHistorico;
 	}
@@ -36,7 +37,8 @@ public class Historico {
 	public void setIdHistorico(int idHistorico) {
 		this.idHistorico = idHistorico;
 	}
-
+	
+	@XmlElement
 	public float getDay_Energy() {
 		return this.day_Energy;
 	}
@@ -45,6 +47,7 @@ public class Historico {
 		this.day_Energy = day_Energy;
 	}
 
+	@XmlElement
 	public float getFrecuencia() {
 		return this.frecuencia;
 	}
@@ -53,6 +56,7 @@ public class Historico {
 		this.frecuencia = frecuencia;
 	}
 
+	@XmlElement
 	public float getIAc() {
 		return this.iAc;
 	}
@@ -61,6 +65,7 @@ public class Historico {
 		this.iAc = iAc;
 	}
 
+	@XmlElement
 	public float getIDc() {
 		return this.iDc;
 	}
@@ -69,6 +74,7 @@ public class Historico {
 		this.iDc = iDc;
 	}
 
+	@XmlElement
 	public float getTemperatura_modulo() {
 		return this.temperatura_modulo;
 	}
@@ -77,6 +83,7 @@ public class Historico {
 		this.temperatura_modulo = temperatura_modulo;
 	}
 
+	@XmlElement
 	public float getVAc() {
 		return this.vAc;
 	}
@@ -85,6 +92,7 @@ public class Historico {
 		this.vAc = vAc;
 	}
 
+	@XmlElement
 	public float getVDc() {
 		return this.vDc;
 	}

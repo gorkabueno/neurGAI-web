@@ -1,10 +1,13 @@
 package dl;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
  * The persistent class for the Sensors database table.
  * 
  */
-
+@XmlRootElement
 public class Sensor {
 
 	private int idSensor;
@@ -16,12 +19,16 @@ public class Sensor {
 	private float temperatura_modulo;
 
 	private float viento;
+	
+	private Sensor sensor;
 
 	public Sensor() {
 	}
+	
+	
 
 
-
+	@XmlElement
 	public float getRadiacion_solar() {
 		return this.radiacion_solar;
 	}
@@ -30,6 +37,7 @@ public class Sensor {
 		this.radiacion_solar = radiacion_solar;
 	}
 
+	@XmlElement
 	public float getTemperatura_ambiente() {
 		return this.temperatura_ambiente;
 	}
@@ -38,6 +46,7 @@ public class Sensor {
 		this.temperatura_ambiente = temperatura_ambiente;
 	}
 
+	@XmlElement
 	public float getTemperatura_modulo() {
 		return this.temperatura_modulo;
 	}
@@ -46,6 +55,7 @@ public class Sensor {
 		this.temperatura_modulo = temperatura_modulo;
 	}
 
+	@XmlElement
 	public float getViento() {
 		return this.viento;
 	}
@@ -55,7 +65,7 @@ public class Sensor {
 	}
 
 
-
+	@XmlElement
 	public int getIdSensor() {
 		return idSensor;
 	}
@@ -64,6 +74,16 @@ public class Sensor {
 
 	public void setIdSensor(int idSensor) {
 		this.idSensor = idSensor;
+	}
+
+
+	@XmlElement
+	public Sensor getSensor() {
+		return sensor;
+	}
+
+	public void setSensor(Sensor sensor) {
+		this.sensor = sensor;
 	}
 
 }

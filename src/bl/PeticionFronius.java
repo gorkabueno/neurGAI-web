@@ -19,16 +19,18 @@ public class PeticionFronius{
 
 
 	private int idInverter;
-
 	private static float day_Energy;
-
 	private static float power;
-
 	private int status;
-
 	private static float TOTAL_ENERGY;
-
 	private static float year_Energy;
+	
+	private int idSensor;
+	private static float radiacion_solar;
+	private static float temperatura_ambiente;
+	private static float temperatura_modulo;
+	private static float viento;
+	private static String fecha;
 
 	public static void peticionInverter() throws MalformedURLException, IOException {
 		
@@ -91,7 +93,68 @@ public class PeticionFronius{
 		      
 		     
 		   }
-		    
+	
+	
+	public static void peticionSensor() throws MalformedURLException, IOException {
+		
+		URL url = new URL("http://u020556.bi.ehu.es/solar_api/v1/GetSensorRealtimeData.cgi?Scope=Device&DeviceId=1&DataCollection=NowSensorData");
+		
+		try (InputStream is = url.openStream();
+		           JsonReader rdr = Json.createReader(is)) {
+
+		          JsonObject obj = rdr.readObject();
+
+		          JsonObject body = obj.getJsonObject("Body");
+		          JsonObject data = body.getJsonObject("Data");
+		          JsonObject radsol = data.getJsonObject("0");
+		          radiacion_solar = radsol.getInt("Value");
+		          
+		          JsonObject tempamb = data.getJsonObject("1");
+		          temperatura_ambiente = tempamb.getInt("Value");
+		          
+		          JsonObject tempmod = data.getJsonObject("2");
+		          temperatura_modulo = tempmod.getInt("Value");
+		          
+		          JsonObject wind = data.getJsonObject("3");
+		          viento = wind.getInt("Value");
+		          
+		          JsonObject head = obj.getJsonObject("Head");
+		          fecha = head.getString("Timestamp");
+		         
+		          
+		          System.out.println(radiacion_solar);
+		          System.out.println(temperatura_ambiente);
+		          System.out.println(temperatura_modulo);
+		          System.out.println(viento);
+		          System.out.println(fecha);
+		          
+		          
+		      }
+		
+		try
+	      {
+			
+			
+		      Class.forName("org.gjt.mm.mysql.Driver");
+		      Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/neurGaiBBDD", "root", "19071989j");
+		      String query = "update Sensor set radiacion_solar = ?, temperatura_ambiente = ?, temperatura_modulo = ?, viento = ? where idSensor = ?";
+		      PreparedStatement preparedStmt = conn.prepareStatement(query);
+		      preparedStmt.setFloat(1, radiacion_solar);
+		      preparedStmt.setFloat(2, temperatura_ambiente);
+		      preparedStmt.setFloat(3, temperatura_modulo);
+		      preparedStmt.setFloat(4, viento);
+		      preparedStmt.setInt(5, 1);
+	        
+		      preparedStmt.executeUpdate();
+		      
+		      conn.close();
+	         
+	      }catch (Exception e)
+	      {
+	          e.printStackTrace();
+	       }
+		
+	}	    
 
 	public int getIdInverter() {
 		return idInverter;
@@ -139,6 +202,26 @@ public class PeticionFronius{
 
 	public void setYear_Energy(float year_Energy) {
 		PeticionFronius.year_Energy = year_Energy;
+	}
+
+
+	public int getIdSensor() {
+		return idSensor;
+	}
+
+
+	public void setIdSensor(int idSensor) {
+		this.idSensor = idSensor;
+	}
+
+
+	public static String getFecha() {
+		return fecha;
+	}
+
+
+	public static void setFecha(String fecha) {
+		PeticionFronius.fecha = fecha;
 	}
 
 }
